@@ -8,5 +8,4 @@ import androidx.compose.ui.Modifier
 @Composable
 fun HomeCard(modifier: Modifier = Modifier){
     Text("1231312")
-
 }
