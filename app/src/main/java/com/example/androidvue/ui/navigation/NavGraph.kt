@@ -6,8 +6,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.androidvue.ui.pages.HomePages.ChineseSong
 import com.example.androidvue.ui.pages.HomePages.MainAppScreen
+import com.example.androidvue.ui.pages.SongScreen.chinese.ChineseSong
 import com.example.androidvue.ui.pages.SongScreen.english.EnglishSong
 import com.example.androidvue.ui.pages.SongScreen.japanese.JapaneseSong
 import com.example.androidvue.ui.pages.UserNav.UserHome
