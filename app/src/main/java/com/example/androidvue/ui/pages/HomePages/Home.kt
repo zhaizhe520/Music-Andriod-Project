@@ -126,12 +126,23 @@ fun HomeDrawerContent(
                     modifier = Modifier.padding(horizontal = 16.dp),
                     color = Color.White
                 )
-
-                DrawerMenuItem("会员中心") { /* TODO */ }
+                DrawerMenuItem("历史浏览") { safeNavigate(Screen.MyFavorites.route) }
                 HorizontalDivider(
                     modifier = Modifier.padding(horizontal = 16.dp),
                     color = Color.White
                 )
+                DrawerMenuItem("我的设置") { safeNavigate(Screen.MyFavorites.route) }
+                HorizontalDivider(
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                    color = Color.White
+                )
+                DrawerMenuItem("退出登录") { safeNavigate(Screen.MyFavorites.route) }
+                HorizontalDivider(
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                    color = Color.White
+                )
+
+
             }
         }
     }
