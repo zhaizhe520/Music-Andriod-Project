@@ -25,7 +25,7 @@ fun MyFavorites() {
         viewModelStoreOwner = LocalContext.current as ComponentActivity
     )
 
-    // 🌟 2. 用 filter 把打勾收藏的歌手捞出来
+    // 🌟  2. 用 filter 把打勾收藏的歌手捞出来
     val favoriteArtists = remember {
         derivedStateOf { musicStore.artistList.filter { it.isFavorite } }
     }.value
