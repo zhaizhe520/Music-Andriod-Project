@@ -191,7 +191,7 @@ fun HomeSearchBar(
                 .background(color = Color(0xFFB1D2EF))
                 .heightIn(max = 50.dp),
             placeholder = {
-                Text(text = "搜索你喜欢的音乐...", fontSize = 12.sp, color = Color.Black)
+                Text(text = "搜索你喜欢的音乐....", fontSize = 12.sp, color = Color.Black)
             },
             leadingIcon = {
                 Text(text = "🔍", modifier = Modifier.padding(start = 12.dp), fontSize = 12.sp)
