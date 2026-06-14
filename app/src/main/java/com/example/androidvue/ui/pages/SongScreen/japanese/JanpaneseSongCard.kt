@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,7 +32,7 @@ fun ImageGridScreen(navController: NavController) {
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(3), // 核心：固定每行 3 列
-            horizontalArrangement = Arrangement.spacedBy(8.dp), // 左右间距
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)     // 上下间距
         ) {
             items(songList.size) { index ->
