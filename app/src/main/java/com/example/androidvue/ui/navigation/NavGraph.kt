@@ -10,6 +10,8 @@ import com.example.androidvue.ui.pages.HomePages.MainAppScreen
 import com.example.androidvue.ui.pages.SongScreen.chinese.ChineseSong
 import com.example.androidvue.ui.pages.SongScreen.english.EnglishSong
 import com.example.androidvue.ui.pages.SongScreen.japanese.JapaneseSong
+import com.example.androidvue.ui.pages.SongScreen.japanese.JapaneseSongDetailScreen
+import com.example.androidvue.ui.pages.SongScreen.japanese.LocalSongDetails
 import com.example.androidvue.ui.pages.UserNav.UserHome
 import com.example.androidvue.ui.pages.UserNav.MyFavorites
 
@@ -24,6 +26,9 @@ sealed class Screen(val route: String) {
     object Login : Screen("login")
     object UserHome : Screen("userHome")
     object MyFavorites : Screen("myFavorites")
+    // 在你的 Screen sealed class 里面加上这一行
+    object JapaneseSongDetailScreen : Screen("JapaneseSongDetailScreen/{songId}")
+
 }
 
 @Composable
@@ -46,7 +51,7 @@ fun NavGraph(
             EnglishSong()
         }
         composable(Screen.Japanese.route) {
-            JapaneseSong()
+            JapaneseSong(navController = navController)
         }
         composable(Screen.Login.route) {
             Login(navController = navController)
@@ -56,6 +61,22 @@ fun NavGraph(
         }
         composable(Screen.MyFavorites.route) {
             MyFavorites()
+        }
+        // 修改你的 NavGraph 对应的 composable
+        composable(Screen.JapaneseSongDetailScreen.route) { backStackEntry ->
+            // 1. 抓取点击时传过来的 id 字符串（比如 "that_summer"）
+            val songId = backStackEntry.arguments?.getString("songId") ?: ""
+
+            // 2. 直接去前端的 LocalSongDetails 列表里查出对应的数据对象
+            val currentSongData = LocalSongDetails.songList.find { it.id == songId }
+
+            // 3. 把查出来的纯前端数据，喂给唯一的详情页
+            if (currentSongData != null) {
+                JapaneseSongDetailScreen(
+                    songData = currentSongData,
+                    navController = navController
+                )
+            }
         }
     }
 }

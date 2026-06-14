@@ -2,6 +2,7 @@ package com.example.androidvue.ui.pages.SongScreen.japanese
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -15,11 +16,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-// 注意换成你自己的 R 文件路径
-// import com.example.yourapp.R
+import androidx.navigation.NavController
 
 @Composable
-fun ImageGridScreen() {
+fun ImageGridScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -28,28 +28,23 @@ fun ImageGridScreen() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // 模拟 9 张图片的资源 ID 数组（记得替换成你 drawable 里的真实图片名）
-        val imageList = listOf(
-            com.example.androidvue.R.drawable.user_logo,
-            com.example.androidvue.R.drawable.user_logo,
-            com.example.androidvue.R.drawable.user_logo,
-            com.example.androidvue.R.drawable.user_logo,
-            com.example.androidvue.R.drawable.user_logo,
-            com.example.androidvue.R.drawable.user_logo,
-            com.example.androidvue.R.drawable.user_logo,
-            com.example.androidvue.R.drawable.user_logo,
-            com.example.androidvue.R.drawable.user_logo,
-        )
+        // 🌟 核心修复：直接使用 LocalSongDetails 里的数据
+        val songList = LocalSongDetails.songList
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(3), // 核心：固定每行 3 列
             horizontalArrangement = Arrangement.spacedBy(8.dp), // 左右间距
             verticalArrangement = Arrangement.spacedBy(8.dp)     // 上下间距
         ) {
-            items(imageList.size) { index ->
+            items(songList.size) { index ->
+                val song = songList[index]
                 // 圆形图片 Box
                 Box(
                     modifier = Modifier
+                        .clickable {
+                            // 🌟 核心修复：跳转时传递数据里的 id，而不是数字 index
+                            navController.navigate("JapaneseSongDetailScreen/${song.id}")
+                        }
                         .fillMaxWidth()
                         .aspectRatio(1f) // 保证 Box 是正方形
                         .clip(CircleShape) // 裁剪为圆形
@@ -57,7 +52,7 @@ fun ImageGridScreen() {
                     contentAlignment = Alignment.Center
                 ) {
                     Image(
-                        painter = painterResource(id = imageList[index]),
+                        painter = painterResource(id = song.imageRes),
                         contentDescription = "圆形图片",
                         contentScale = ContentScale.Crop, // 裁剪铺满，这样圆才好看
                         modifier = Modifier.fillMaxSize()
