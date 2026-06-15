@@ -21,6 +21,7 @@ import androidx.navigation.NavController
 fun ImageGridScreen(navController: NavController) {
     Column(
         modifier = Modifier
+
             .fillMaxSize()
             .padding(16.dp)
     ) {
@@ -33,7 +34,7 @@ fun ImageGridScreen(navController: NavController) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(3), // 核心：固定每行 3 列
             horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)     // 上下间距
+            verticalArrangement = Arrangement.spacedBy(40.dp)     // 上下间距
         ) {
             items(songList.size) { index ->
                 val song = songList[index]
